@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
-import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
+import { CloseOutlined, DownOutlined, MenuOutlined } from '@ant-design/icons';
 import { useTheme } from 'theme/theme-context';
 
 import WhiteArrow from 'assets/icons/bArrowRight.svg?react';
+import Ethereum from 'assets/icons/ethirium.svg?react';
 import LogoIcon from 'assets/icons/logo-header.svg?react';
+import LogoutIcon from 'assets/icons/logout.svg?react';
+import MetamaskIcon from 'assets/icons/metamask.svg?react';
 import BlackArrow from 'assets/icons/wArrowRight.svg?react';
 
 // import BgImage from 'assets/images/bg-side.png';
@@ -56,9 +59,18 @@ export default function Header() {
           ))}
         </nav>
         <div className='flex-centered lg:gap-2 gap-1'>
-          <button className='dark:bg-white dark:text-black bg-black text-white lg:px-4 px-3 lg:py-2 py-2 rounded font-semibold lg:text-base text-sm'>
-            Launch dAPP
+          <button className='flex-centered gap-2  bg-[#1594D6] text-white lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm'>
+            <Ethereum className='inline-block' />
+            Ethereum
+            <DownOutlined />
           </button>
+          <button className='lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 border-[#50CDF5] flex-centered gap-1'>
+            <LogoIcon className='inline-block w-8 h-5' /> 0
+          </button>
+          <button className='dark:bg-[##50d7f521]  lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 dark:border-white border-black flex-centered gap-1'>
+            <MetamaskIcon className='inline-block max-w-10' /> xxxxasdf...sdfa
+          </button>
+          <LogoutIcon />
           <DarkModeSwitch checked={isDarkMode} onChange={toggleDarkMode} size={30} />
         </div>
       </div>
@@ -103,10 +115,23 @@ export default function Header() {
               ))}
             </nav>
             {/* Launch dAPP button */}
-            <div className='pr-6 mt-8'>
-              <button className='sm:w-[50%] w-[70%] dark:bg-white dark:text-black bg-black text-white py-3 rounded-md font-semibold'>
-                Launch dAPP
-              </button>
+            <div className='flex items-start justify-start mt-8 flex-col lg:gap-2 gap-6'>
+              <div className='flex-centered gap-4'>
+                <button className='flex-centered gap-2  bg-[#1594D6] text-white lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm'>
+                  <Ethereum className='inline-block' />
+                  Ethereum
+                  <DownOutlined />
+                </button>
+                <button className='lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 border-[#50CDF5] flex-centered gap-1'>
+                  <LogoIcon className='inline-block w-5 h-5' /> 0
+                </button>
+              </div>
+              <div className='flex items-start justify-start gap-4'>
+                <button className='dark:bg-[##50d7f521]  lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 dark:border-white border-black'>
+                  <MetamaskIcon className='inline-block max-w-10' /> xxxxasdf...sdfa
+                </button>
+                <LogoutIcon />
+              </div>
             </div>
           </div>
         </div>
