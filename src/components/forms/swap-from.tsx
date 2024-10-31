@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { useTheme } from 'theme/theme-context';
 
@@ -11,12 +11,17 @@ import ReloadIconLight from 'assets/icons/reload-light.svg?react';
 import ReloadIcon from 'assets/icons/reload.svg?react';
 import ShiftIconLight from 'assets/icons/shift-light.svg?react';
 import ShiftIcon from 'assets/icons/shift.svg?react';
+import SwapIcon from 'assets/icons/swap.svg?react';
 
 import CryptoInput from './components/crypto-input';
 
-const SwapForm = () => {
+interface IProps {
+  setSelectedTab: Dispatch<SetStateAction<number>>;
+  selectedTab: number;
+}
+
+const SwapForm = ({ setSelectedTab, selectedTab }: IProps) => {
   const { theme } = useTheme();
-  const [selectedTab, setSelectedTab] = useState(0);
 
   // State for currency and amount for each input
   const [payCurrency, setPayCurrency] = useState('DAI');
@@ -71,42 +76,47 @@ const SwapForm = () => {
           </div>
         </div>
 
-        {/* "You Pay" Section */}
-        <CryptoInput
-          label='You Pay'
-          currency={payCurrency}
-          amount={payAmount}
-          onAmountChange={(value: any) => setPayAmount(value)}
-          onCurrencyChange={(currency: any) => setPayCurrency(currency)}
-          estimatedPrice='132,155,561'
-        />
+        {/* Container for Fields with Swap Icon */}
+        <div className='relative space-y-4'>
+          {/* "You Pay" Section */}
+          <CryptoInput
+            label='You Pay'
+            currency={payCurrency}
+            amount={payAmount}
+            onAmountChange={(value: any) => setPayAmount(value)}
+            onCurrencyChange={(currency: any) => setPayCurrency(currency)}
+            estimatedPrice='132,155,561'
+          />
 
-        {/* Swap Icon */}
-        <div className='bg-gray-700 rounded-full p-2 flex items-center justify-center'>
-          <span className='text-2xl text-white'>↕️</span>
+          {/* Swap Icon Positioned Between the Fields */}
+          <div className='absolute top-[43%] left-1/2 transform -translate-x-1/2 -translate-y-1/2  z-20'>
+            <SwapIcon />
+          </div>
+
+          {/* "You Receive" Section */}
+          <CryptoInput
+            label='You Receive'
+            currency={receiveCurrency}
+            amount={receiveAmount}
+            onAmountChange={(value: any) => setReceiveAmount(value)}
+            onCurrencyChange={(currency: any) => setReceiveCurrency(currency)}
+            estimatedPrice='54,530'
+          />
         </div>
 
-        {/* "You Receive" Section */}
-        <CryptoInput
-          label='You Receive'
-          currency={receiveCurrency}
-          amount={receiveAmount}
-          onAmountChange={(value: any) => setReceiveAmount(value)}
-          onCurrencyChange={(currency: any) => setReceiveCurrency(currency)}
-          estimatedPrice='54,530'
-        />
-
         {/* Exchange Rate */}
-        <p className='text-sm text-gray-400 text-center mt-2'>1 WETH = 3332.025 DAI (~$3,3351.6)</p>
+        <div className='border border-[#424242] dark:text-white text-black rounded-lg p-4 flex items-center justify-between'>
+          <p className='text-sm'>1 WETH = 3332.025 DAI (~$3,3351.6)</p>
 
-        {/* Fee Section */}
-        <p className='text-sm text-gray-400 text-center'>
-          Free <span className='text-white'>$13.76</span>
-        </p>
+          {/* Fee Section */}
+          <p className='text-xxs text-[#aaa]'>
+            Free <span className='text-sm'>$13.76</span>
+          </p>
+        </div>
 
         {/* Submit Button */}
         <button
-          className='w-full mt-6 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold'
+          className='w-full mt-6 btnGreen text-white py-3 rounded-lg hover:bg-green-700 transition font-medium text-sm'
           onClick={handleSubmit}
         >
           Give permission to use DAI

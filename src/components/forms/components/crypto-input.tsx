@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import DaiIcon from 'assets/icons/dai-icon.svg?react';
 import WethIcon from 'assets/icons/weth-icon.svg?react';
@@ -18,12 +18,17 @@ const CryptoInput = ({ label, currency, amount, estimatedPrice, onAmountChange, 
   };
 
   return (
-    <div className='relative bg-gray-900 rounded-lg p-4 flex items-center justify-between space-x-4 text-white'>
+    <div className='relative dark:bg-[#0F0F0F] bg-[#FCFAFA] border dark:border-black border-[#BEBEBE] rounded-lg px-3 py-4 flex items-center justify-between space-x-0 text-white'>
       <div className='flex flex-col'>
-        <label className='text-xs text-gray-400 absolute top-0'>{label}</label>
+        <label
+          className='text-xs text-[#707070] border border-[#707070] absolute top-0 left-0 px-2 py-[2px] z-10'
+          style={{ borderRadius: '5.758px 0px 5.039px 0px' }}
+        >
+          {label}
+        </label>
         <div className='relative w-full'>
           <button
-            className='appearance-none bg-gray-900 text-white px-2 py-1 rounded-lg w-full focus:outline-none flex '
+            className='appearance-none dark:bg-[#0F0F0F] dark:text-white text-black px-2 py-1 rounded-lg w-full focus:outline-none flex '
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
             {coins.find((coin) => coin.name === currency)?.icon}
@@ -36,11 +41,11 @@ const CryptoInput = ({ label, currency, amount, estimatedPrice, onAmountChange, 
           </button>
 
           {dropdownOpen && (
-            <div className='absolute mt-1 w-full bg-gray-800 rounded-lg shadow-lg z-10'>
+            <div className='absolute mt-1 w-full dark:bg-[#0F0F0F] bg-[#FCFAFA] dark:text-white text-black rounded-lg shadow-lg z-20'>
               {coins.map((coin) => (
                 <div
                   key={coin.id}
-                  className='flex items-center p-2 cursor-pointer hover:bg-gray-700'
+                  className='flex items-center p-2 cursor-pointer dark:hover:bg-gray-700 hover:bg-slate-100'
                   onClick={() => handleSelectCoin(coin)}
                 >
                   {coin.icon}
@@ -51,14 +56,16 @@ const CryptoInput = ({ label, currency, amount, estimatedPrice, onAmountChange, 
           )}
         </div>
       </div>
-      <div className='flex flex-col items-end'>
+      <div className='flex flex-col items-end mt-2'>
         <input
           type='text'
-          className='bg-gray-900 text-right text-2xl font-semibold focus:outline-none'
+          className='dark:bg-[#0f0f0f] bg-[#FCFAFA] dark:text-white text-black focus:outline-none text-right font-medium '
           value={amount}
           onChange={(e) => onAmountChange(e.target.value)}
         />
-        <span className='text-xs text-gray-400'>Estimated price ${estimatedPrice}</span>
+        <span className='text-xxs text-[#8A8A8A]'>
+          Estimated price <span className='text-[#aaa] text-sm font-medium'>${estimatedPrice}</span>
+        </span>
       </div>
     </div>
   );
