@@ -65,7 +65,7 @@ export default function Header() {
             <DownOutlined />
           </button>
           <button className='lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 border-[#50CDF5] flex-centered gap-1'>
-            <LogoIcon className='inline-block w-8 h-5' /> 0
+            <LogoIcon className='inline-block w-10 h-6' /> 0
           </button>
           <button className='dark:bg-[##50d7f521]  lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 dark:border-white border-black flex-centered gap-1'>
             <MetamaskIcon className='inline-block max-w-10' /> xxxxasdf...sdfa

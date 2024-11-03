@@ -119,8 +119,8 @@ const SwapFormLimit = ({ setSelectedTab, selectedTab }: IProps) => {
 
                 {/* Fee Section */}
                 <div>
-                  <p className='text-[#50E89F] text-xxs'>Set to market</p>
-                  <div className='text-xxs text-[#aaa] p-1 bg-[#2D2D2D] flex-centered gap-1 mt-1'>
+                  <p className='dark:text-[#50E89F] text-[#218354] text-xxs'>Set to market</p>
+                  <div className='text-xxs dark:text-[#aaa] text-white p-1 bg-[#2D2D2D] flex-centered gap-1 mt-1'>
                     <p>ETH</p>
                     <SwapEthIcon />
                   </div>
@@ -129,7 +129,7 @@ const SwapFormLimit = ({ setSelectedTab, selectedTab }: IProps) => {
 
               <div className='w-[7\30%] border border-[#424242] dark:text-white text-black rounded-lg p-4 flex items-end justify-center flex-col'>
                 <p className='text-xxs'>Expires in</p>
-                <select className='bg-[#1C2225] rounded-lg text-white focus:outline-none text-xl font-medium'>
+                <select className='dark:bg-[#1C2225] bg-white rounded-lg focus:outline-none text-xl font-medium'>
                   <option value='1'>7 days</option>
                   <option value='2'>8 days</option>
                   <option value='3'>9 days</option>
@@ -145,7 +145,7 @@ const SwapFormLimit = ({ setSelectedTab, selectedTab }: IProps) => {
               Give permission to use DAI
             </button>
             <button
-              className='w-full mt-6 bg-[#313131] text-white py-3 rounded-lg hover:bg-gray-700 transition font-medium text-sm'
+              className='w-full mt-6 dark:bg-[#313131] bg-[#7070700D] dark:text-white text-black py-3 rounded-lg dark:hover:bg-gray-700 transition font-medium text-sm dark:border-none border border-black'
               onClick={handleSubmit}
             >
               Review Limit Order
