@@ -10,6 +10,7 @@ import App from './App';
 import * as translations from './locales';
 
 import './index.css';
+import '@rainbow-me/rainbowkit/styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

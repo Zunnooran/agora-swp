@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 import { CloseOutlined, DownOutlined, MenuOutlined } from '@ant-design/icons';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useTheme } from 'theme/theme-context';
 
+// import { useAccount } from 'wagmi';
 import WhiteArrow from 'assets/icons/bArrowRight.svg?react';
 import Ethereum from 'assets/icons/ethirium.svg?react';
 import LogoIcon from 'assets/icons/logo-header.svg?react';
@@ -16,6 +18,8 @@ import { links } from './components/data';
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
+  // const { address, isConnected } = useAccount();
+
   const [isDarkMode, setDarkMode] = useState(theme === 'dark');
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
@@ -67,9 +71,118 @@ export default function Header() {
           <button className='lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 border-[#50CDF5] flex-centered gap-1'>
             <LogoIcon className='inline-block w-10 h-6' /> 0
           </button>
-          <button className='dark:bg-[##50d7f521]  lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 dark:border-white border-black flex-centered gap-1'>
-            <MetamaskIcon className='inline-block max-w-10' /> xxxxasdf...sdfa
-          </button>
+          {/* <button className='dark:bg-[##50d7f521]  lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 dark:border-white border-black flex-centered gap-1'>
+           <MetamaskIcon className='inline-block max-w-10' /> xxxxasdf...sdfa
+          </button> */}
+          {/* <WalletButton.Custom wallet='metamask'>
+            {({ ready, connect }) => {
+              return (
+                <button
+                  type='button'
+                  disabled={!ready}
+                  onClick={connect}
+                  className='dark:bg-[#50d7f521] lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 dark:border-white border-black flex-centered gap-1'
+                >
+                  {isConnected ? (
+                    <span>
+                      {address ? address.slice(0, 6) : null}...{address ? address.slice(-4) : null}
+                    </span>
+                  ) : (
+                    <>
+                      <MetamaskIcon className='inline-block max-w-10' /> Meta Mask
+                    </>
+                  )}
+                </button>
+              );
+            }}
+          </WalletButton.Custom> */}
+          <ConnectButton.Custom>
+            {({
+              account,
+              chain,
+              openAccountModal,
+              openChainModal,
+              openConnectModal,
+              authenticationStatus,
+              mounted,
+            }) => {
+              const ready = mounted && authenticationStatus !== 'loading';
+              const connected =
+                ready && account && chain && (!authenticationStatus || authenticationStatus === 'authenticated');
+
+              return (
+                <div
+                  {...(!ready && {
+                    'aria-hidden': true,
+                    style: {
+                      opacity: 0,
+                      pointerEvents: 'none',
+                      userSelect: 'none',
+                    },
+                  })}
+                >
+                  {(() => {
+                    if (!connected) {
+                      return (
+                        <button
+                          onClick={openConnectModal}
+                          type='button'
+                          className='dark:bg-[##50d7f521]  lg:px-4 px-3 lg:py-3 py-2 rounded-full font-medium lg:text-base text-sm border-2 dark:border-white border-black flex-centered gap-1'
+                        >
+                          Connect Wallet
+                        </button>
+                      );
+                    }
+
+                    if (chain.unsupported) {
+                      return (
+                        <button onClick={openChainModal} type='button'>
+                          Wrong network
+                        </button>
+                      );
+                    }
+
+                    return (
+                      <div style={{ display: 'flex', gap: 12 }}>
+                        <button
+                          onClick={openChainModal}
+                          style={{ display: 'flex', alignItems: 'center' }}
+                          type='button'
+                        >
+                          {chain.hasIcon && (
+                            <div
+                              style={{
+                                background: chain.iconBackground,
+                                width: 12,
+                                height: 12,
+                                borderRadius: 999,
+                                overflow: 'hidden',
+                                marginRight: 4,
+                              }}
+                            >
+                              {chain.iconUrl && (
+                                <img
+                                  alt={chain.name ?? 'Chain icon'}
+                                  src={chain.iconUrl}
+                                  style={{ width: 12, height: 12 }}
+                                />
+                              )}
+                            </div>
+                          )}
+                          {chain.name}
+                        </button>
+
+                        <button onClick={openAccountModal} type='button'>
+                          {account.displayName}
+                          {account.displayBalance ? ` (${account.displayBalance})` : ''}
+                        </button>
+                      </div>
+                    );
+                  })()}
+                </div>
+              );
+            }}
+          </ConnectButton.Custom>
           <LogoutIcon />
           <DarkModeSwitch checked={isDarkMode} onChange={toggleDarkMode} size={30} />
         </div>
