@@ -23,7 +23,7 @@ export const connectors = connectorsForWallets(
   ],
   {
     appName: 'Agora Dex',
-    projectId: 'AGORA_ID',
+    projectId: 'AGORA_ID_JNAKJSNVJKDVNKALSNKASNDKJ',
   }
 );
 

@@ -3,8 +3,12 @@ import { useState } from 'react';
 import SwapForm from 'components/forms/swap-from';
 import SwapFormLimit from 'components/forms/swap-from-limit';
 
+import useGetTokens from './core/hooks/use-get-tokens';
+
 function Home() {
   const [selectedTab, setSelectedTab] = useState(0);
+  const { data } = useGetTokens();
+  console.log(data);
 
   return (
     <div>
